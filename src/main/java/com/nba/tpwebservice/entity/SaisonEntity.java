@@ -1,6 +1,9 @@
 package com.nba.tpwebservice.entity;
 
+import com.nba.tpwebservice.repository.EquipeRepository;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -8,6 +11,9 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "saison", schema = "public", catalog = "port")
+@Getter
+@Setter
+
 public class SaisonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -24,7 +30,10 @@ public class SaisonEntity {
     private Timestamp fin;
 
     @Transient
-    List<MatchEntity> listeMatch;
+    List<EquipeEntity> listEquipe;
+
+    @Transient
+    List<MatchEntity> listMatch;
 
     public String getIdSaison() {
         return idSaison;

@@ -3,6 +3,8 @@ package com.nba.tpwebservice.entity;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +23,28 @@ public class JoueurEntity {
     @Basic
     @Column(name = "date_naissance")
     private Timestamp dateNaissance;
+    @Transient
+    public HashMap<String, Integer> hashMapState;
+
+    public void setHashMapState(HashMap<String, Integer> hashMapState) {
+        this.hashMapState = hashMapState;
+    }
+
+    public HashMap<String, Integer> getHashMapState() {
+        return hashMapState;
+    }
+
+    public void getStats(List<ActionEntity> actions){
+        HashMap<String, Integer> hashMapAction = new HashMap<>();
+        for (ActionEntity action: actions) {
+            hashMapAction.put(action.getNom(), getActionState());
+        }
+        this.hashMapState = hashMapAction;
+    }
+
+    public int getActionState(){
+        return 0;
+    }
 
     public String getIdJoueur() {
         return idJoueur;

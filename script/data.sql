@@ -1,7 +1,6 @@
 -- Insert data into the 'saison' table
 INSERT INTO saison (id_saison, details, debut, fin) VALUES
-  ('SAISON_2023', 'Regular Season', '2023-01-01', '2023-12-31'),
-  ('SAISON_2023_playoffs', 'Playoffs', '2023-04-01', '2023-06-01');
+  ('SAISON_2023', 'Regular Season', '2023-01-01', '2023-12-31');
 
 -- Insert data into the 'joueur' table
 INSERT INTO joueur (id_joueur, nom, prenom, date_naissance) VALUES
@@ -16,10 +15,10 @@ INSERT INTO equipe (id_equipe, nom, ville, pays, date_creation) VALUES
   ('EQUIPE_BKN', 'Brooklyn Nets', 'Brooklyn', 'USA', '1967-01-01');
 
 -- Insert data into the 'equipe_joueur' table
-INSERT INTO equipe_joueur (id_equipe_joueur, id_equipe, id_joueur, dossart) VALUES
-  (1, 'EQUIPE_LAL', 'JOUEUR_1', '23'),
-  (2, 'EQUIPE_GSW', 'JOUEUR_2', '30'),
-  (3, 'EQUIPE_BKN', 'JOUEUR_3', '7');
+INSERT INTO equipe_joueur (id_equipe_joueur, id_equipe, id_joueur, dossart, id_saison) VALUES
+  (1, 'EQUIPE_LAL', 'JOUEUR_1', '23','SAISON_2023'),
+  (2, 'EQUIPE_GSW', 'JOUEUR_2', '30','SAISON_2023'),
+  (3, 'EQUIPE_BKN', 'JOUEUR_3', '7','SAISON_2023');
 
 -- Insert data into the 'match' table
 INSERT INTO match (id_match, id_equipe1, id_equipe2, point_equipe1, point_equipe2) VALUES
@@ -29,11 +28,11 @@ INSERT INTO match (id_match, id_equipe1, id_equipe2, point_equipe1, point_equipe
 
 -- Insert data into the 'feuille_match' table
 INSERT INTO feuille_match (id_feuille_match, id_match, id_equipe_joueur) VALUES
-  (1, 'MATCH_1', 'EQUIPE_LAL'),
-  (2, 'MATCH_1', 'EQUIPE_GSW'),
-  (3, 'MATCH_2', 'EQUIPE_BKN'),
-  (4, 'MATCH_3', 'EQUIPE_LAL'),
-  (5, 'MATCH_3', 'EQUIPE_GSW');
+  (1, 'MATCH_1', 1),
+  (2, 'MATCH_1', 2),
+  (3, 'MATCH_2', 3),
+  (4, 'MATCH_3', 1),
+  (5, 'MATCH_3', 2);
 
 -- Insert data into the 'action' table
 INSERT INTO action (id_action, nom, valeur) VALUES
@@ -42,9 +41,9 @@ INSERT INTO action (id_action, nom, valeur) VALUES
   ('ACTION_3', 'Dunk', 2);
 
 -- Insert data into the 'action_match' table
-INSERT INTO action_match (id_action_matc, id_equipe_joueur, id_action, date_action, valeur) VALUES
-  (1, 'EQUIPE_LAL', 'ACTION_1', '2023-01-05', 1),
-  (2, 'EQUIPE_GSW', 'ACTION_2', '2023-01-05', 1),
-  (3, 'EQUIPE_BKN', 'ACTION_3', '2023-01-10', 1),
-  (4, 'EQUIPE_LAL', 'ACTION_1', '2023-01-10', 1),
-  (5, 'EQUIPE_GSW', 'ACTION_2', '2023-01-15', 1);
+INSERT INTO action_match (id_action_match, id_equipe_joueur, id_action, date_action, valeur, id_match) VALUES
+  (1, 1, 'ACTION_1', '2023-01-05', 1, 'MATCH_1'),
+  (2, 2, 'ACTION_2', '2023-01-05', 1, 'MATCH_1'),
+  (3, 3, 'ACTION_3', '2023-01-10', 1, 'MATCH_2'),
+  (4, 1, 'ACTION_1', '2023-01-10', 1, 'MATCH_2'),
+  (5, 2, 'ACTION_2', '2023-01-15', 1, 'MATCH_3');

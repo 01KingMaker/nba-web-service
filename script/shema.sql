@@ -75,7 +75,26 @@ create table if not exists action_match(
     id_equipe_joueur varchar(20) references equipe_joueur(id_equipe_joueur),
     id_action varchar(20) references action(id_action),
     date_action timestamp,
-    valeur int default 0
+    valeur int default 0,
+    id_match varchar(20) references match(id_match)
 );
 
-creat
+create or replace view
+        v_joueur_saison as
+        select
+            s.debut, s.fin, s.id_saison, ej.dossart, j.nom, j.prenom, j.date_naissance, j.id_joueur, 1 id
+        from equipe_joueur ej
+        join saison s
+            on s.id_saison = ej.id_saison
+        join joueur j
+            on j.id_joueur = ej.id_joueur
+        join equipe eq
+            on eq.id_equipe = ej.id_equipe;
+
+create or replace view
+    v_action_par_joueur_par_saison  as
+    select eq.id_saison, eq.id_joueur, eq.dossart, eq.id_equipe_joueur,
+           am.id_action_match, am.id_action, am.date_action, am.valeur, am.id_match, 1 id
+           from equipe_joueur eq
+    join action_match am
+    on am.id_equipe_joueur = eq.id_equipe_joueur
