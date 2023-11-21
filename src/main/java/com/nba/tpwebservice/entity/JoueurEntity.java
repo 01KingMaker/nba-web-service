@@ -29,9 +29,15 @@ public class JoueurEntity {
     public HashMap<String, Integer> hashMapState;
 
     @Transient
-    @Getter
-    @Setter
     public int nombreMatch;
+
+    public void setNombreMatch(int nombreMatch) {
+        this.nombreMatch = nombreMatch;
+    }
+
+    public int getNombreMatch() {
+        return nombreMatch;
+    }
 
     public void setHashMapState(HashMap<String, Integer> hashMapState) {
         this.hashMapState = hashMapState;

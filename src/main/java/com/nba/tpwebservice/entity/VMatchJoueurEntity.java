@@ -10,14 +10,12 @@ import java.util.Objects;
 @Table(name = "v_match_joueur", schema = "public", catalog = "port")
 public class VMatchJoueurEntity {
     @Basic
-    @Getter
-    @Setter
     @Column(name = "nombre")
     private Long nombre;
-    @Basic
+    @Id
     @Column(name = "id_equipe_joueur")
     private String idEquipeJoueur;
-    @Id
+
     @Column(name = "id_saison")
     private String idSaison;
     @Basic
@@ -26,6 +24,14 @@ public class VMatchJoueurEntity {
     @Basic
     @Column(name = "id_joueur")
     private String idJoueur;
+
+    public Long getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(Long nombre) {
+        this.nombre = nombre;
+    }
 
     public String getIdEquipeJoueur() {
         return idEquipeJoueur;

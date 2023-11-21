@@ -28,17 +28,19 @@ public class VJoueurSaisonService {
     VMatchJoueurRepository vMatchJoueurRepository;
     public List<VJoueurSaisonEntity> getAllState(String idSaison){
         List<VJoueurSaisonEntity> joueurSaisonEntities = this.vJoueurSaisonRepository.findAll();
-
         List<VActionParJoueurParSaisonEntity> actionsSaison = this.vActionParJoueurParSaisonRepository.getVActionParJoueurParSaisonEntitiesByIdSaison(idSaison);
-        // obtenir tous les joueurs d'une saison
         for (VJoueurSaisonEntity vj: joueurSaisonEntities) {
             vj.setJoueur(this.joueurRepository.getJoueurEntitiesByIdJoueur(vj.getIdJoueur()));
+            VMatchJoueurEntity vMatchJoueurEntity = this.vMatchJoueurRepository.getVMatchJoueurEntityByIdJoueurAndIdSaison(vj.getJoueur().getIdJoueur(), idSaison);
 
-            VMatchJoueurEntity vMatchJoueurEntity = this.vMatchJoueurRepository.getVMatchJoueurEntityByIdJoueurAndIdSaison(vj.getIdJoueur(), idSaison);
             int nombre = Integer.valueOf(String.valueOf(vMatchJoueurEntity.getNombre()));
             vj.getJoueur().setNombreMatch(nombre);
             vj.getJoueur().setHashMapState(this.joueurService.getStats(vj.getIdSaison(), vj.getIdJoueur(), actionsSaison, nombre));
         }
         return joueurSaisonEntities;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
