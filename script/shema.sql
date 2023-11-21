@@ -39,7 +39,7 @@ create table if not exists equipe_joueur(
     id_joueur varchar(20) references joueur(id_joueur),
     dossart varchar(3)
 );
-alter table equipe_joueur add column id_saison varchar(20) references saison()
+alter table equipe_joueur add column id_saison varchar(20) references saison(id_saison);
 
 create sequence seq_match;
 
@@ -77,3 +77,5 @@ create table if not exists action_match(
     date_action timestamp,
     valeur int default 0
 );
+
+creat

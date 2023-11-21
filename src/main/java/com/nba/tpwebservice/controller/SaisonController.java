@@ -5,8 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/Saision")
+@RequestMapping("/state")
 public class SaisonController {
+
     @GetMapping
     public String getSaisonState(){
         return "ok";
