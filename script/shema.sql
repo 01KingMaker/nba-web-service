@@ -3,7 +3,6 @@ create database nba;
 
 create sequence seq_saison;
 
-drop table saison;
 create table if not exists saison
 (
     id_saison varchar(20) primary key,
@@ -14,7 +13,7 @@ create table if not exists saison
 
 create sequence seq_joueur;
 
-drop table joueur;
+--drop table joueur;
 create table if not exists joueur(
     id_joueur varchar(20) primary key,
     nom varchar(50),
@@ -24,7 +23,7 @@ create table if not exists joueur(
 
 create sequence seq_equipe;
 
-drop table equipe;
+--drop table equipe;
 create table if not exists equipe(
     id_equipe varchar(20) primary key,
     nom varchar(50),
@@ -33,18 +32,19 @@ create table if not exists equipe(
     date_creation timestamp
 );
 
-drop table equipe_joueur;
+--drop table equipe_joueur;
 create table if not exists equipe_joueur(
     id_equipe_joueur varchar(20) primary key,
     id_equipe varchar(20) references equipe(id_equipe),
     id_joueur varchar(20) references joueur(id_joueur),
     dossart varchar(3)
 );
+alter table equipe_joueur add column id_saison varchar(20) references saison()
 
 create sequence seq_match;
 
 
-drop table match;
+--drop table match;
 create table if not exists match(
     id_match varchar(20) primary key,
     id_equipe1 varchar(20) references equipe(id_equipe),
@@ -53,7 +53,7 @@ create table if not exists match(
     point_equipe2 int
 );
 
-drop table feuille_match;
+--drop table feuille_match;
 create table if not exists feuille_match(
     id_feuille_match serial primary key,
     id_match varchar(20) references match(id_match),
@@ -62,14 +62,14 @@ create table if not exists feuille_match(
 
 create sequence seq_action;
 
-drop table action;
+--drop table action;
 create table if not exists action(
     id_action varchar(20) primary key, 
     nom varchar(50),
     valeur int
 );
 
-drop table action_match;
+--drop table action_match;
 create table if not exists action_match(
     id_action_match serial primary key,
     id_equipe_joueur varchar(20) references equipe_joueur(id_equipe_joueur),

@@ -42,7 +42,7 @@ INSERT INTO action (id_action, nom, valeur) VALUES
   ('ACTION_3', 'Dunk', 2);
 
 -- Insert data into the 'action_match' table
-INSERT INTO action_match (id_action, id_equipe_joueur, id_action, date_action, valeur) VALUES
+INSERT INTO action_match (id_action_matc, id_equipe_joueur, id_action, date_action, valeur) VALUES
   (1, 'EQUIPE_LAL', 'ACTION_1', '2023-01-05', 1),
   (2, 'EQUIPE_GSW', 'ACTION_2', '2023-01-05', 1),
   (3, 'EQUIPE_BKN', 'ACTION_3', '2023-01-10', 1),
