@@ -27,12 +27,14 @@ public class JoueurService {
     public HashMap<String, Float> getStats(String idSaison, String idJoueur, List<VActionParJoueurParSaisonEntity> actionsSaison, int nombre){
         List<ActionEntity> actions = this.actionRepository.findAll();
         HashMap<String, Float> hashMapAction = new HashMap<>();
-        System.out.println("saison "+idSaison+" joueur"+idJoueur);
 
+        float point = 0;
         hashMapAction.put("match", (float) nombre);
         for (ActionEntity action: actions) {
+            point += action.getValeur();
             hashMapAction.put(action.getNom(), (this.getActionState(idSaison, idJoueur, action.getIdAction(), actionsSaison)/nombre));
         }
+        hashMapAction.put("point", point/nombre);
         return hashMapAction;
     }
 
