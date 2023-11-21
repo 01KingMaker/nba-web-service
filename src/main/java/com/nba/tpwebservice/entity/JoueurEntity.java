@@ -26,7 +26,7 @@ public class JoueurEntity {
     @Column(name = "date_naissance")
     private Timestamp dateNaissance;
     @Transient
-    public HashMap<String, Integer> hashMapState;
+    public HashMap<String, Float> hashMapState;
 
     @Transient
     public int nombreMatch;
@@ -39,18 +39,18 @@ public class JoueurEntity {
         return nombreMatch;
     }
 
-    public void setHashMapState(HashMap<String, Integer> hashMapState) {
+    public void setHashMapState(HashMap<String, Float> hashMapState) {
         this.hashMapState = hashMapState;
     }
 
-    public HashMap<String, Integer> getHashMapState() {
+    public HashMap<String, Float> getHashMapState() {
         return hashMapState;
     }
 
     public void getStats(List<ActionEntity> actions){
-        HashMap<String, Integer> hashMapAction = new HashMap<>();
+        HashMap<String, Float> hashMapAction = new HashMap<>();
         for (ActionEntity action: actions) {
-            hashMapAction.put(action.getNom(), getActionState());
+            hashMapAction.put(action.getNom(), (float) getActionState());
         }
         this.hashMapState = hashMapAction;
     }
