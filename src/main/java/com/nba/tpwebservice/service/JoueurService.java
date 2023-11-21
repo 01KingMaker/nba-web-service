@@ -21,11 +21,11 @@ public class JoueurService {
     ActionRepository actionRepository;
     @Autowired
     VActionParJoueurParSaisonRepository vActionParJoueurParSaisonRepository;
-    public HashMap<String, Integer> getStats(String idSaison, String idJoueur){
+    public HashMap<String, Integer> getStats(String idSaison, String idJoueur, List<VActionParJoueurParSaisonEntity> actionsSaison){
         List<ActionEntity> actions = this.actionRepository.findAll();
         HashMap<String, Integer> hashMapAction = new HashMap<>();
         for (ActionEntity action: actions) {
-            hashMapAction.put(action.getNom(), this.getActionState(idSaison, idJoueur, action.getIdAction()));
+            hashMapAction.put(action.getNom(), this.getActionState(idSaison, idJoueur, action.getIdAction(), actionsSaison));
         }
         return hashMapAction;
     }
@@ -33,16 +33,10 @@ public class JoueurService {
     public int getActionState(){
         return 0;
     }
-    public int getActionState(String idSaison, String idJoueur, String idAction){
-        List<VActionParJoueurParSaisonEntity> actions = this.vActionParJoueurParSaisonRepository.getVActionParJoueurParSaisonEntitiesByIdSaison(idSaison);
-
-        System.out.println("taille ="+actions.size());
+    public int getActionState(String idSaison, String idJoueur, String idAction, List<VActionParJoueurParSaisonEntity> actions){
         int retour = 0;
-        System.out.println("---");
         for (VActionParJoueurParSaisonEntity action:
              actions) {
-            System.out.println(action.getIdAction() + "," +action.getDossart() + "," + action.getIdJoueur());
-            System.out.println("current player "+action.getIdJoueur());
             if(action.getIdJoueur().equals(idJoueur)){
                 if(action.getIdAction().equals(idAction)){
                     retour += 1;

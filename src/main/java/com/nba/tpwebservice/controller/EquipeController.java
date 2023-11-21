@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping("/equipe")
-@CrossOrigin(origins = { "* "})
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EquipeController {
     @Autowired
     EquipeService equipeService;
