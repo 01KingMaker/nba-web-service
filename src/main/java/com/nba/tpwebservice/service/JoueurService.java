@@ -2,8 +2,10 @@ package com.nba.tpwebservice.service;
 
 import com.nba.tpwebservice.entity.ActionEntity;
 import com.nba.tpwebservice.entity.VActionParJoueurParSaisonEntity;
+import com.nba.tpwebservice.entity.VMatchJoueurEntity;
 import com.nba.tpwebservice.repository.ActionRepository;
 import com.nba.tpwebservice.repository.VActionParJoueurParSaisonRepository;
+import com.nba.tpwebservice.repository.VMatchJoueurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +23,16 @@ public class JoueurService {
     ActionRepository actionRepository;
     @Autowired
     VActionParJoueurParSaisonRepository vActionParJoueurParSaisonRepository;
-    public HashMap<String, Integer> getStats(String idSaison, String idJoueur, List<VActionParJoueurParSaisonEntity> actionsSaison){
+    @Autowired
+    VMatchJoueurRepository vMatchJoueurRepository;
+    public HashMap<String, Integer> getStats(String idSaison, String idJoueur, List<VActionParJoueurParSaisonEntity> actionsSaison, int nombre){
         List<ActionEntity> actions = this.actionRepository.findAll();
         HashMap<String, Integer> hashMapAction = new HashMap<>();
+        System.out.println("saison "+idSaison+" joueur"+idJoueur);
+
+        hashMapAction.put("match", nombre);
         for (ActionEntity action: actions) {
-            hashMapAction.put(action.getNom(), this.getActionState(idSaison, idJoueur, action.getIdAction(), actionsSaison));
+            hashMapAction.put(action.getNom(), (this.getActionState(idSaison, idJoueur, action.getIdAction(), actionsSaison)/nombre));
         }
         return hashMapAction;
     }

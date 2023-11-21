@@ -98,3 +98,12 @@ create or replace view
            from equipe_joueur eq
     join action_match am
     on am.id_equipe_joueur = eq.id_equipe_joueur
+
+select count(fm.id_match) from feuille_match fm join equipe_joueur ej on fm.id_equipe_joueur=ej.id_equipe_joueur
+group by fm.id_equipe_joueur
+
+
+create or replace view
+    v_match_joueur as
+select count(fm.id_match) nombre, ej.id_equipe_joueur, ej.id_saison,j.nom, j.id_joueur from feuille_match fm join equipe_joueur ej on fm.id_equipe_joueur=ej.id_equipe_joueur join joueur j on j.id_joueur=ej.id_joueur
+group by ej.id_equipe_joueur, j.nom, j.id_joueur, ej.id_saison;

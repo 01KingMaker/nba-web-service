@@ -1,12 +1,12 @@
 package com.nba.tpwebservice.service;
 
-import com.nba.tpwebservice.entity.ActionEntity;
-import com.nba.tpwebservice.entity.JoueurEntity;
+import com.nba.tpwebservice.entity.VMatchJoueurEntity;
 import com.nba.tpwebservice.entity.VActionParJoueurParSaisonEntity;
 import com.nba.tpwebservice.entity.VJoueurSaisonEntity;
 import com.nba.tpwebservice.repository.JoueurRepository;
 import com.nba.tpwebservice.repository.VActionParJoueurParSaisonRepository;
 import com.nba.tpwebservice.repository.VJoueurSaisonRepository;
+import com.nba.tpwebservice.repository.VMatchJoueurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,8 @@ public class VJoueurSaisonService {
     JoueurService joueurService;
     @Autowired
     VActionParJoueurParSaisonRepository vActionParJoueurParSaisonRepository;
+    @Autowired
+    VMatchJoueurRepository vMatchJoueurRepository;
     public List<VJoueurSaisonEntity> getAllState(String idSaison){
         List<VJoueurSaisonEntity> joueurSaisonEntities = this.vJoueurSaisonRepository.findAll();
 
@@ -32,7 +34,10 @@ public class VJoueurSaisonService {
         for (VJoueurSaisonEntity vj: joueurSaisonEntities) {
             vj.setJoueur(this.joueurRepository.getJoueurEntitiesByIdJoueur(vj.getIdJoueur()));
 
-            vj.getJoueur().setHashMapState(this.joueurService.getStats(vj.getIdSaison(), vj.getIdJoueur(), actionsSaison));
+            VMatchJoueurEntity vMatchJoueurEntity = this.vMatchJoueurRepository.getVMatchJoueurEntityByIdJoueurAndIdSaison(vj.getIdJoueur(), idSaison);
+            int nombre = Integer.valueOf(String.valueOf(vMatchJoueurEntity.getNombre()));
+            vj.getJoueur().setNombreMatch(nombre);
+            vj.getJoueur().setHashMapState(this.joueurService.getStats(vj.getIdSaison(), vj.getIdJoueur(), actionsSaison, nombre));
         }
         return joueurSaisonEntities;
     }

@@ -1,6 +1,8 @@
 package com.nba.tpwebservice.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -25,6 +27,11 @@ public class JoueurEntity {
     private Timestamp dateNaissance;
     @Transient
     public HashMap<String, Integer> hashMapState;
+
+    @Transient
+    @Getter
+    @Setter
+    public int nombreMatch;
 
     public void setHashMapState(HashMap<String, Integer> hashMapState) {
         this.hashMapState = hashMapState;
