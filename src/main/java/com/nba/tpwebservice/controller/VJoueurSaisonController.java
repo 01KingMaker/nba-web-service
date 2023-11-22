@@ -15,7 +15,6 @@ public class VJoueurSaisonController {
     VJoueurSaisonService vJoueurSaisonService;
     @GetMapping("/{id}")
     public List<VJoueurSaisonEntity> getAllStates(@PathVariable("id") String idSaison){
-        // List<VJoueurSaisonEntity> joueurSaisonEntities = this.vJoueurSaisonRepository.findAll();
         return this.vJoueurSaisonService.getAllState(idSaison);
     }
 }

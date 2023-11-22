@@ -1,6 +1,8 @@
 package com.nba.tpwebservice.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -11,59 +13,33 @@ public class ActionMatchEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_action_match")
+    @Getter
+    @Setter
     private int idActionMatch;
     @Basic
+    @Getter
+    @Setter
     @Column(name = "id_equipe_joueur")
     private String idEquipeJoueur;
     @Basic
+    @Getter
+    @Setter
     @Column(name = "id_action")
     private String idAction;
     @Basic
+    @Getter
+    @Setter
     @Column(name = "date_action")
     private Timestamp dateAction;
     @Basic
+    @Getter
+    @Setter
     @Column(name = "valeur")
     private Integer valeur;
-
-    public int getIdActionMatch() {
-        return idActionMatch;
-    }
-
-    public void setIdActionMatch(int idActionMatch) {
-        this.idActionMatch = idActionMatch;
-    }
-
-    public String getIdEquipeJoueur() {
-        return idEquipeJoueur;
-    }
-
-    public void setIdEquipeJoueur(String idEquipeJoueur) {
-        this.idEquipeJoueur = idEquipeJoueur;
-    }
-
-    public String getIdAction() {
-        return idAction;
-    }
-
-    public void setIdAction(String idAction) {
-        this.idAction = idAction;
-    }
-
-    public Timestamp getDateAction() {
-        return dateAction;
-    }
-
-    public void setDateAction(Timestamp dateAction) {
-        this.dateAction = dateAction;
-    }
-
-    public Integer getValeur() {
-        return valeur;
-    }
-
-    public void setValeur(Integer valeur) {
-        this.valeur = valeur;
-    }
+    @Getter
+    @Setter
+    @Column(name = "id_match")
+    private String idMatch;
 
     @Override
     public boolean equals(Object o) {

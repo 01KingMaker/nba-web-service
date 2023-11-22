@@ -7,7 +7,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "match", schema = "public", catalog = "port")
 public class MatchEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_match")
     private String idMatch;
@@ -23,6 +22,10 @@ public class MatchEntity {
     @Basic
     @Column(name = "point_equipe2")
     private Integer pointEquipe2;
+    public MatchEntity(){
+        this.pointEquipe1 = 0;
+        this.pointEquipe2 = 0;
+    }
 
     public String getIdMatch() {
         return idMatch;

@@ -24,7 +24,7 @@ public class JoueurService {
     VActionParJoueurParSaisonRepository vActionParJoueurParSaisonRepository;
     @Autowired
     VMatchJoueurRepository vMatchJoueurRepository;
-    public HashMap<String, Float> getStats(String idSaison, String idJoueur, List<VActionParJoueurParSaisonEntity> actionsSaison, int nombre){
+    public HashMap<String, Float> setStats(String idSaison, String idJoueur, List<VActionParJoueurParSaisonEntity> actionsSaison, int nombre){
         List<ActionEntity> actions = this.actionRepository.findAll();
         HashMap<String, Float> hashMapAction = new HashMap<>();
 

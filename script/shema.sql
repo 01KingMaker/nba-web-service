@@ -82,7 +82,7 @@ create table if not exists action_match(
 create or replace view
         v_joueur_saison as
         select
-            s.debut, s.fin, s.id_saison, ej.dossart, j.nom, j.prenom, j.date_naissance, j.id_joueur, 1 id
+            s.debut, s.fin, s.id_saison, ej.dossart, j.id_joueur
         from equipe_joueur ej
         join saison s
             on s.id_saison = ej.id_saison
@@ -97,11 +97,7 @@ create or replace view
            am.id_action_match, am.id_action, am.date_action, am.valeur, am.id_match, 1 id
            from equipe_joueur eq
     join action_match am
-    on am.id_equipe_joueur = eq.id_equipe_joueur
-
-select count(fm.id_match) from feuille_match fm join equipe_joueur ej on fm.id_equipe_joueur=ej.id_equipe_joueur
-group by fm.id_equipe_joueur
-
+    on am.id_equipe_joueur = eq.id_equipe_joueur;
 
 create or replace view
     v_match_joueur as

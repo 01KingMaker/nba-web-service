@@ -1,17 +1,20 @@
 package com.nba.tpwebservice.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.nba.tpwebservice.entity.VJoueurSaisonEntity;
+import com.nba.tpwebservice.service.VJoueurSaisonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("/state")
+@RequestMapping("/saison")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SaisonController {
-    @GetMapping
-    public String getSaisonState(){
-        return "ok";
+    @Autowired
+    VJoueurSaisonService vJoueurSaisonService;
+    @GetMapping("/{id}")
+    public List<VJoueurSaisonEntity> getAllStates(@PathVariable("id") String idSaison){
+        return this.vJoueurSaisonService.getAllState(idSaison);
     }
-
 }
